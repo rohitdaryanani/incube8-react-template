@@ -3,7 +3,7 @@ import Ticket from "./Ticket.js";
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { addTicket, moveTicket } from './actions/index'
+import { addTicket, updateTicket } from './actions/index'
 
 
 const styles = {
@@ -54,19 +54,21 @@ class App extends Component {
           <div style={styles.box}>
             <label style={styles.box.label}>IN-PROGRESS</label>
             {/** show Todo tickets below */}
-            {this.props.tickets.tickets.filter(ticket => ticket.status === 'todo').map((ticket) => {
-              return <Ticket key={ticket.id} ticket={ticket} moveTicket={this.props.moveTicket}/>
+            {this.props.tickets.filter(ticket => ticket.status === 'todo').map((ticket, index) => {
+              return <Ticket key={ticket.id} ticket={ticket} index={index} updateTicket={this.props.updateTicket}/>
             })}
           </div> 
           <div style={styles.box}>
             <label style={styles.box.label}>DONE</label>
-            {this.props.tickets.tickets.filter(ticket => ticket.status === 'done').map((ticket) => {
-              return <Ticket key={ticket.id} ticket={ticket} moveTicket={this.props.moveTicket}/>
+            {this.props.tickets.filter(ticket => ticket.status === 'done').map((ticket, index) => {
+              return <Ticket key={ticket.id} ticket={ticket} index={index} updateTicket={this.props.updateTicket}/>
             })}
           </div>
           <div style={styles.box}>
             <label style={styles.box.label}>CLOSE</label>
-            {/** show Close tickets below */}
+            {this.props.tickets.filter(ticket => ticket.status === 'close').map((ticket, index) => {
+              return <Ticket key={ticket.id} ticket={ticket} index={index} updateTicket={this.props.updateTicket}/>
+            })}
           </div>
         </div>
       </div>
@@ -81,7 +83,7 @@ const mapStateToProps = ({tickets}) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ addTicket, moveTicket }, dispatch)
+    return bindActionCreators({ addTicket, updateTicket }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

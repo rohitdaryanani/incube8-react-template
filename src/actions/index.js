@@ -1,16 +1,16 @@
-export const ADD_TICKETS = 'ADD_TICKETS';
-export const MOVE_TICKET = 'MOVE_TICKETS';
+export const ADD_TICKET = 'ADD_TICKET';
+export const UPDATE_TICKET = 'UPDATE_TICKETS';
 
-export const addTicket = (ticket) => {
+export const addTicket = (desc) => {
   return {
-    type: ADD_TICKETS,
-    ticket,
+    type: ADD_TICKET,
+    desc,
   }
 }
-export const moveTicket = (ticket, status) => {
+export const updateTicket = (index, status) => {
   return {
-    type: MOVE_TICKET,
-    ticket,
+    type: UPDATE_TICKET,
+    index,
     status
   }
 }

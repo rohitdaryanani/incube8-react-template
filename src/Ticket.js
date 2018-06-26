@@ -21,8 +21,8 @@ class Ticket extends Component {
     handleMoveTicket: PropTypes.func.isRequired
   };
 
-  handleMoveTicket = (ticket, status) => {
-    this.props.moveTicket(ticket, status)
+  updateTicketHandler = (index, status) => {
+    this.props.updateTicket(index, status)
   }
 
   render() {
@@ -34,9 +34,9 @@ class Ticket extends Component {
         <div>{desc}</div>
         {/* Ticket actions [Done/Not Fix/Close]. Modify to display them properly */}
         <div>
-          <button onClick={() => this.handleMoveTicket(this.props.ticket, 'done')}>Done</button>
-          {this.props.ticket.status !== 'todo' && <button>Not Fix</button> }
-          <button>Close</button>
+          <button onClick={() => this.updateTicketHandler(this.props.index, 'done')}>Done</button>
+          {this.props.ticket.status !== 'todo' && <button onClick={() => this.updateTicketHandler(this.props.index, 'todo')}>Not Fix</button> }
+          <button onClick={() => this.updateTicketHandler(this.props.index, 'close')}>Close</button>
         </div>
       </div>
     );
