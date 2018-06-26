@@ -11,8 +11,16 @@ const initialState = {
 export default (state = initialState, action) => {
   switch(action.type){
     case ADD_TICKETS:
-    console.log(action)
-    return action;
+    return { 
+        tickets : [
+             ...state.tickets, 
+            {
+                id: id++,
+                desc: action.ticket,
+                status: 'todo'
+            }
+        ] 
+    };
     default:
     return state
   }

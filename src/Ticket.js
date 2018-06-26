@@ -23,7 +23,6 @@ class Ticket extends Component {
 
   render() {
     const { desc } = this.props.ticket;
-    console.log(this.props)
     return (
       <div style={styles.ticket}>
         {/* Ticket description */}
@@ -31,7 +30,7 @@ class Ticket extends Component {
         {/* Ticket actions [Done/Not Fix/Close]. Modify to display them properly */}
         <div>
           <button>Done</button>
-          <button>Not Fix</button>
+          {this.props.ticket.status !== 'todo' && <button>Not Fix</button> }
           <button>Close</button>
         </div>
       </div>

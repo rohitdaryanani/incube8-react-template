@@ -25,34 +25,16 @@ let id = 0;
 
 class App extends Component {
   state = {
-    tickets: [{
-      id: id++,
-      desc: 'Have fun with Online Test',
-      status: 'todo'
-    }],
     ticketInputeValue: '',
   };
 
-  addTicket = (e) => {
+  addTicketHandler = (e) => {
     e.preventDefault(); 
-    this.props.addTicket()
     if(!this.state.ticketInputeValue) {
       return
     }
-    this.setState(
-      {
-        tickets: 
-          [
-            ...this.state.tickets,
-            {
-              id: id++,
-              desc: this.state.ticketInputeValue,
-              status: 'todo'
-            }
-          ],
-        ticketInputeValue: ''
-      },
-    )
+    this.props.addTicket(this.state.ticketInputeValue)
+    this.setState({ ticketInputeValue: ''})
 
   }
 
@@ -63,10 +45,9 @@ class App extends Component {
   }
   
   render() {    
-    console.log(this.props)
     return (
       <div>
-        <form onSubmit={this.addTicket}>
+        <form onSubmit={this.addTicketHandler}>
         <input type="text" style={{ borderRadius: "3px" }} name="ticket" value={this.state.ticketInputeValue} onChange={this.handleTicketInputValueHandler}/>
         <input type="submit" value="ADD" style={{ cursor: "pointer" }}/>
         </form>
@@ -76,7 +57,7 @@ class App extends Component {
           <div style={styles.box}>
             <label style={styles.box.label}>IN-PROGRESS</label>
             {/** show Todo tickets below */}
-            {this.state.tickets.map((ticket) => {
+            {this.props.tickets.tickets.map((ticket) => {
               return <Ticket key={ticket.id} ticket={ticket}/>
             })}
           </div> 
