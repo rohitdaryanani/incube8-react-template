@@ -65,19 +65,19 @@ class App extends Component {
             <label style={styles.box.label}>IN-PROGRESS</label>
             {/** show Todo tickets below */}
             {this.props.tickets.filter(ticket => ticket.status === 'todo').map((ticket, index) => {
-              return <Ticket key={ticket.id} ticket={ticket} index={index} updateTicket={this.props.updateTicket}/>
+              return <Ticket key={ticket.id} ticket={ticket} updateTicket={this.props.updateTicket}/>
             })}
           </div> 
           <div style={styles.box}>
             <label style={styles.box.label}>DONE</label>
             {this.props.tickets.filter(ticket => ticket.status === 'done').map((ticket, index) => {
-              return <Ticket key={ticket.id} ticket={ticket} index={index} updateTicket={this.props.updateTicket}/>
+              return <Ticket key={ticket.id} ticket={ticket} updateTicket={this.props.updateTicket}/>
             })}
           </div>
           <div style={styles.box}>
             <label style={styles.box.label}>CLOSE</label>
             {this.props.tickets.filter(ticket => ticket.status === 'close').map((ticket, index) => {
-              return <Ticket key={ticket.id} ticket={ticket} index={index} updateTicket={this.props.updateTicket}/>
+              return <Ticket key={ticket.id} ticket={ticket} updateTicket={this.props.updateTicket}/>
             })}
           </div>
         </div>

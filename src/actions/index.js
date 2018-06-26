@@ -7,10 +7,10 @@ export const addTicket = (desc) => {
     desc,
   }
 }
-export const updateTicket = (index, status) => {
+export const updateTicket = (id, status) => {
   return {
     type: UPDATE_TICKET,
-    index,
+    id,
     status
   }
 }

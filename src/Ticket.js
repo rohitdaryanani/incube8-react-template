@@ -15,18 +15,29 @@ const styles = {
   }
 };
 
+let to;
+
 class Ticket extends Component {
   static propTypes = {
     desc: PropTypes.string.isRequired,
     handleMoveTicket: PropTypes.func.isRequired
   };
 
-  updateTicketHandler = (index, status) => {
-    this.props.updateTicket(index, status)
+
+  updateTicketHandler = (id, status) => {
+    this.props.updateTicket(id, status)
+    if(to && status !== 'done') {
+      clearTimeout(to);
+      to = undefined;
+      return;
+    }
+    if(status === 'done') {
+      to = setTimeout(() => this.updateTicketHandler(id, 'close'), 5000)
+      console.log(to)
+    }
   }
 
   render() {
-    console.log(this.props)
     const { desc } = this.props.ticket;
     return (
       <div style={styles.ticket}>
@@ -34,9 +45,9 @@ class Ticket extends Component {
         <div>{desc}</div>
         {/* Ticket actions [Done/Not Fix/Close]. Modify to display them properly */}
         <div>
-          {this.props.ticket.status === 'todo' && <button onClick={() => this.updateTicketHandler(this.props.index, 'done')}>Done</button>}
-          {this.props.ticket.status === 'done' && <button onClick={() => this.updateTicketHandler(this.props.index, 'todo')}>Not Fix</button> }
-          {this.props.ticket.status !== 'close' && <button onClick={() => this.updateTicketHandler(this.props.index, 'close')}>Close</button>}
+          {this.props.ticket.status === 'todo' && <button onClick={() => this.updateTicketHandler(this.props.ticket.id, 'done')}>Done</button>}
+          {this.props.ticket.status === 'done' && <button onClick={() => this.updateTicketHandler(this.props.ticket.id, 'todo')}>Not Fix</button> }
+          {this.props.ticket.status !== 'close' && <button onClick={() => this.updateTicketHandler(this.props.ticket.id, 'close')}>Close</button>}
         </div>
       </div>
     );

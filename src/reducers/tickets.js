@@ -18,7 +18,11 @@ export default (state = initialState, action) => {
         }]
 
     case UPDATE_TICKET:
-        state[action.index].status = action.status;
+        const ticket = state.find(t => t.id === action.id)
+        if(!ticket){
+            return state;
+        }
+        ticket.status = action.status
         return [...state]
     default:
     return state
