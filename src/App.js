@@ -3,7 +3,7 @@ import Ticket from "./Ticket.js";
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { addTicket } from './actions/index'
+import { addTicket, moveTicket } from './actions/index'
 
 
 const styles = {
@@ -19,9 +19,6 @@ const styles = {
     }
   }
 };
-
-// Keep track of ticket id
-let id = 0;
 
 class App extends Component {
   state = {
@@ -57,13 +54,15 @@ class App extends Component {
           <div style={styles.box}>
             <label style={styles.box.label}>IN-PROGRESS</label>
             {/** show Todo tickets below */}
-            {this.props.tickets.tickets.map((ticket) => {
-              return <Ticket key={ticket.id} ticket={ticket}/>
+            {this.props.tickets.tickets.filter(ticket => ticket.status === 'todo').map((ticket) => {
+              return <Ticket key={ticket.id} ticket={ticket} moveTicket={this.props.moveTicket}/>
             })}
           </div> 
           <div style={styles.box}>
             <label style={styles.box.label}>DONE</label>
-            {/** show Done tickets below */}
+            {this.props.tickets.tickets.filter(ticket => ticket.status === 'done').map((ticket) => {
+              return <Ticket key={ticket.id} ticket={ticket} moveTicket={this.props.moveTicket}/>
+            })}
           </div>
           <div style={styles.box}>
             <label style={styles.box.label}>CLOSE</label>
@@ -82,7 +81,7 @@ const mapStateToProps = ({tickets}) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ addTicket }, dispatch)
+    return bindActionCreators({ addTicket, moveTicket }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

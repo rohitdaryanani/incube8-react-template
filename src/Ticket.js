@@ -21,7 +21,12 @@ class Ticket extends Component {
     handleMoveTicket: PropTypes.func.isRequired
   };
 
+  handleMoveTicket = (ticket, status) => {
+    this.props.moveTicket(ticket, status)
+  }
+
   render() {
+    console.log(this.props)
     const { desc } = this.props.ticket;
     return (
       <div style={styles.ticket}>
@@ -29,7 +34,7 @@ class Ticket extends Component {
         <div>{desc}</div>
         {/* Ticket actions [Done/Not Fix/Close]. Modify to display them properly */}
         <div>
-          <button>Done</button>
+          <button onClick={() => this.handleMoveTicket(this.props.ticket, 'done')}>Done</button>
           {this.props.ticket.status !== 'todo' && <button>Not Fix</button> }
           <button>Close</button>
         </div>
