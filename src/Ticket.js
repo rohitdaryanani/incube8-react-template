@@ -34,9 +34,9 @@ class Ticket extends Component {
         <div>{desc}</div>
         {/* Ticket actions [Done/Not Fix/Close]. Modify to display them properly */}
         <div>
-          <button onClick={() => this.updateTicketHandler(this.props.index, 'done')}>Done</button>
-          {this.props.ticket.status !== 'todo' && <button onClick={() => this.updateTicketHandler(this.props.index, 'todo')}>Not Fix</button> }
-          <button onClick={() => this.updateTicketHandler(this.props.index, 'close')}>Close</button>
+          {this.props.ticket.status === 'todo' && <button onClick={() => this.updateTicketHandler(this.props.index, 'done')}>Done</button>}
+          {this.props.ticket.status === 'done' && <button onClick={() => this.updateTicketHandler(this.props.index, 'todo')}>Not Fix</button> }
+          {this.props.ticket.status !== 'close' && <button onClick={() => this.updateTicketHandler(this.props.index, 'close')}>Close</button>}
         </div>
       </div>
     );

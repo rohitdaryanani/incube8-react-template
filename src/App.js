@@ -23,15 +23,24 @@ const styles = {
 class App extends Component {
   state = {
     ticketInputeValue: '',
+    loading: false,
   };
 
   addTicketHandler = (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
     if(!this.state.ticketInputeValue) {
       return
     }
-    this.props.addTicket(this.state.ticketInputeValue)
-    this.setState({ ticketInputeValue: ''})
+    this.setState({
+      loading: true,
+    })
+    new Promise((res, rej) => {
+      setTimeout(res, 2000)
+    })
+    .then(() => {
+      this.props.addTicket(this.state.ticketInputeValue)
+      this.setState({ ticketInputeValue: '', loading: false})
+    })
 
   }
 
@@ -46,7 +55,8 @@ class App extends Component {
       <div>
         <form onSubmit={this.addTicketHandler}>
         <input type="text" style={{ borderRadius: "3px" }} name="ticket" value={this.state.ticketInputeValue} onChange={this.handleTicketInputValueHandler}/>
-        <input type="submit" value="ADD" style={{ cursor: "pointer" }}/>
+        <input type="submit" value="ADD" style={{ cursor: "pointer" }} disabled={this.state.loading} />
+        {this.state.loading && <bold>...</bold>}
         </form>
         <br />
         <br />
