@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import Ticket from "./Ticket.js";
 
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { addTicket } from './actions/index'
+
+
 const styles = {
   container: {
     display: "flex"
@@ -30,6 +35,7 @@ class App extends Component {
 
   addTicket = (e) => {
     e.preventDefault(); 
+    this.props.addTicket()
     if(!this.state.ticketInputeValue) {
       return
     }
@@ -54,10 +60,10 @@ class App extends Component {
     this.setState({
       ticketInputeValue: e.target.value
     })
-    console.log(e.target.value)
   }
-
+  
   render() {    
+    console.log(this.props)
     return (
       <div>
         <form onSubmit={this.addTicket}>
@@ -88,4 +94,14 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = ({tickets}) => {
+  return {
+    tickets
+  };
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({ addTicket }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
