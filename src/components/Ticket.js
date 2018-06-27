@@ -23,15 +23,15 @@ class Ticket extends Component {
     handleMoveTicket: PropTypes.func.isRequired
   };
 
-  updateTicketHandler = (id, status) => {
-    this.props.updateTicket(id, status);
+  updateTicketHandler = (id, desc, status) => {
+    this.props.updateTicket(id, desc, status);
     if (to && status !== 'done') {
       clearTimeout(to);
       to = undefined;
       return;
     }
     if (status === 'done') {
-      to = setTimeout(() => this.updateTicketHandler(id, 'close'), 5000);
+      to = setTimeout(() => this.updateTicketHandler(id, desc, 'close'), 5000);
     }
   };
 
@@ -44,7 +44,11 @@ class Ticket extends Component {
           {this.props.ticket.status === 'todo' && (
             <button
               onClick={() =>
-                this.updateTicketHandler(this.props.ticket.id, 'done')
+                this.updateTicketHandler(
+                  this.props.ticket.id,
+                  this.props.ticket.desc,
+                  'done'
+                )
               }
             >
               Done
@@ -53,7 +57,11 @@ class Ticket extends Component {
           {this.props.ticket.status === 'done' && (
             <button
               onClick={() =>
-                this.updateTicketHandler(this.props.ticket.id, 'todo')
+                this.updateTicketHandler(
+                  this.props.ticket.id,
+                  this.props.ticket.desc,
+                  'todo'
+                )
               }
             >
               Not Fix
@@ -62,7 +70,11 @@ class Ticket extends Component {
           {this.props.ticket.status !== 'close' && (
             <button
               onClick={() =>
-                this.updateTicketHandler(this.props.ticket.id, 'close')
+                this.updateTicketHandler(
+                  this.props.ticket.id,
+                  this.props.ticket.desc,
+                  'close'
+                )
               }
             >
               Close
