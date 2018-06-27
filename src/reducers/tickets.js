@@ -22,7 +22,6 @@ export default (state = initialState, action) => {
 
     case UPDATE_TICKET:
       const ticket = state.find(t => t.id === action.id);
-      console.log(action);
       if (!ticket) {
         return state;
       }
