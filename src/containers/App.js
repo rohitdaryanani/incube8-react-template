@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import Ticket from './Ticket.js';
+import Ticket from '../components/Ticket';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { addTicket, updateTicket } from './actions/index';
+import { addTicket, updateTicket } from '../actions/index';
 
 const styles = {
   container: {
@@ -71,7 +71,6 @@ class App extends Component {
         <div style={styles.container}>
           <div style={styles.box}>
             <label style={styles.box.label}>IN-PROGRESS</label>
-            {/** show Todo tickets below */}
             {this.props.tickets
               .filter(ticket => ticket.status === 'todo')
               .map((ticket, index) => {
