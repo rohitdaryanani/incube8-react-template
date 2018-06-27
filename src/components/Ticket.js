@@ -27,7 +27,10 @@ class Ticket extends Component {
     router: PropTypes.object
   };
 
-  updateTicketHandler = (id, desc, status) => {
+  updateTicketHandler = (e, id, desc, status) => {
+    if (e) {
+      e.stopPropagation();
+    }
     this.props.updateTicket(id, desc, status);
     if (to && status !== 'done') {
       clearTimeout(to);
@@ -35,13 +38,14 @@ class Ticket extends Component {
       return;
     }
     if (status === 'done') {
-      to = setTimeout(() => this.updateTicketHandler(id, desc, 'close'), 5000);
+      to = setTimeout(
+        e => this.updateTicketHandler(e, id, desc, 'close'),
+        5000
+      );
     }
   };
 
   redirectDetailPageHandler = id => {
-    console.log(id);
-    console.log(this);
     this.context.router.history.push(`/${id}`);
   };
 
@@ -55,17 +59,23 @@ class Ticket extends Component {
         <div>{desc}</div>
         <div>
           {this.props.ticket.status === 'todo' && (
-            <button onClick={() => this.updateTicketHandler(id, desc, 'done')}>
+            <button
+              onClick={e => this.updateTicketHandler(e, id, desc, 'done')}
+            >
               Done
             </button>
           )}
           {this.props.ticket.status === 'done' && (
-            <button onClick={() => this.updateTicketHandler(id, desc, 'todo')}>
+            <button
+              onClick={e => this.updateTicketHandler(e, id, desc, 'todo')}
+            >
               Not Fix
             </button>
           )}
           {this.props.ticket.status !== 'close' && (
-            <button onClick={() => this.updateTicketHandler(id, desc, 'close')}>
+            <button
+              onClick={e => this.updateTicketHandler(e, id, desc, 'close')}
+            >
               Close
             </button>
           )}
