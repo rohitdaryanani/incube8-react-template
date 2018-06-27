@@ -1,17 +1,17 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 const styles = {
   ticket: {
-    border: "1px solid #ccc",
-    borderRadius: "3px",
-    minHeight: "7em",
-    padding: "0.5em",
-    margin: "0.5em",
-    fontWeight: "normal",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between"
+    border: '1px solid #ccc',
+    borderRadius: '3px',
+    minHeight: '7em',
+    padding: '0.5em',
+    margin: '0.5em',
+    fontWeight: 'normal',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between'
   }
 };
 
@@ -23,31 +23,51 @@ class Ticket extends Component {
     handleMoveTicket: PropTypes.func.isRequired
   };
 
-
   updateTicketHandler = (id, status) => {
-    this.props.updateTicket(id, status)
-    if(to && status !== 'done') {
+    this.props.updateTicket(id, status);
+    if (to && status !== 'done') {
       clearTimeout(to);
       to = undefined;
       return;
     }
-    if(status === 'done') {
-      to = setTimeout(() => this.updateTicketHandler(id, 'close'), 5000)
-      console.log(to)
+    if (status === 'done') {
+      to = setTimeout(() => this.updateTicketHandler(id, 'close'), 5000);
     }
-  }
+  };
 
   render() {
     const { desc } = this.props.ticket;
     return (
       <div style={styles.ticket}>
-        {/* Ticket description */}
         <div>{desc}</div>
-        {/* Ticket actions [Done/Not Fix/Close]. Modify to display them properly */}
         <div>
-          {this.props.ticket.status === 'todo' && <button onClick={() => this.updateTicketHandler(this.props.ticket.id, 'done')}>Done</button>}
-          {this.props.ticket.status === 'done' && <button onClick={() => this.updateTicketHandler(this.props.ticket.id, 'todo')}>Not Fix</button> }
-          {this.props.ticket.status !== 'close' && <button onClick={() => this.updateTicketHandler(this.props.ticket.id, 'close')}>Close</button>}
+          {this.props.ticket.status === 'todo' && (
+            <button
+              onClick={() =>
+                this.updateTicketHandler(this.props.ticket.id, 'done')
+              }
+            >
+              Done
+            </button>
+          )}
+          {this.props.ticket.status === 'done' && (
+            <button
+              onClick={() =>
+                this.updateTicketHandler(this.props.ticket.id, 'todo')
+              }
+            >
+              Not Fix
+            </button>
+          )}
+          {this.props.ticket.status !== 'close' && (
+            <button
+              onClick={() =>
+                this.updateTicketHandler(this.props.ticket.id, 'close')
+              }
+            >
+              Close
+            </button>
+          )}
         </div>
       </div>
     );
