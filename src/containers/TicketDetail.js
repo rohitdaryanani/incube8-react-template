@@ -16,6 +16,13 @@ const styles = {
     label: {
       fontWeight: 600
     }
+  },
+  ticket: {
+    width: '400px',
+    margin: '0px auto',
+    border: '1px solid rgb(204, 204, 204)',
+    borderRadius: '3px',
+    padding: '0.5em'
   }
 };
 
@@ -34,12 +41,12 @@ class TicketDetail extends Component {
     );
     if (!ticket) {
     } else {
-      console.log(ticket);
       this.setState({
         ticket,
         ticketInputeValue: ticket.desc,
         status: ticket.status,
-        id: ticket.id
+        id: ticket.id,
+        check: false
       });
     }
   }
@@ -47,6 +54,9 @@ class TicketDetail extends Component {
   updateTicketHandler = e => {
     e.preventDefault();
     if (!this.state.ticketInputeValue) {
+      this.setState({
+        check: true
+      });
       return;
     }
     this.props.updateTicket(
@@ -66,7 +76,6 @@ class TicketDetail extends Component {
   };
 
   handleTicketStatusValueHandler = e => {
-    console.log(e.target.value);
     this.setState({
       status: e.target.value
     });
@@ -77,25 +86,36 @@ class TicketDetail extends Component {
       return <p>404</p>;
     }
     return (
-      <div>
+      <div style={styles.ticket}>
         <h1>Update Ticket</h1>
         <form onSubmit={this.updateTicketHandler}>
-          <input
-            type="text"
-            style={{ borderRadius: '3px' }}
-            name="ticket"
-            value={this.state.ticketInputeValue}
-            onChange={this.handleTicketInputValueHandler}
-          />
-          <select
-            value={this.state.status}
-            onChange={this.handleTicketStatusValueHandler}
-          >
-            <option value="todo">Todo</option>
-            <option value="done">Done</option>
-            <option value="close">Close</option>
-          </select>
-
+          <p>
+            Description:
+            <input
+              type="text"
+              style={{ borderRadius: '3px', marginLeft: 20, width: 200 }}
+              name="ticket"
+              value={this.state.ticketInputeValue}
+              onChange={this.handleTicketInputValueHandler}
+            />
+          </p>
+          {this.state.check && (
+            <span style={{ color: '#ff003b', marginLeft: 5 }}>
+              This value is required{' '}
+            </span>
+          )}
+          <p>
+            Status:
+            <select
+              value={this.state.status}
+              onChange={this.handleTicketStatusValueHandler}
+              style={{ borderRadius: '3px', marginLeft: 54 }}
+            >
+              <option value="todo">Todo</option>
+              <option value="done">Done</option>
+              <option value="close">Close</option>
+            </select>
+          </p>
           <input
             type="submit"
             value="Update"
