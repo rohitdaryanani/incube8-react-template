@@ -1,0 +1,36 @@
+  /* label color */
+  .input-field label {
+    color: #f36511;
+  }
+  /* label focus color */
+  .input-field input[type=text]:focus + label {
+    color: #f36511;
+  }
+  /* label underline focus color */
+  .input-field input[type=text]:focus {
+    border-bottom: 1px solid #f36511;
+    box-shadow: 0 1px 0 0 #f36511;
+  }
+  /* valid color */
+  .input-field input[type=text].valid {
+    border-bottom: 1px solid #f36511;
+    box-shadow: 0 1px 0 0 #f36511;
+  }
+  /* invalid color */
+  .input-field input[type=text].invalid {
+    border-bottom: 1px solid #f36511;
+    box-shadow: 0 1px 0 0 #f36511;
+  }
+  /* icon prefix focus color */
+  .input-field .prefix.active {
+    color: #f36511;
+  }
+
+  .card-button {
+    background: #f36511;
+    margin-top: 10;
+  }
+  .card-button:hover {
+    background: #c7520c;
+    margin-top: 10;
+  }

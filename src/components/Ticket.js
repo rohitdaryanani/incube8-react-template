@@ -1,27 +1,22 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-const styles = {
-  ticket: {
-    border: '1px solid #ccc',
-    borderRadius: '3px',
-    minHeight: '7em',
-    padding: '0.5em',
-    margin: '0.5em',
-    fontWeight: 'normal',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    cursor: 'pointer'
-  }
-};
+import './Ticket.css'
 
 let to;
 
 class Ticket extends Component {
+  componentDidMount() {
+    const { id, desc, status } = this.props.ticket;
+    if (!to && status === 'done') {
+      to = setTimeout(
+        e => this.updateTicketHandler(e, id, desc, 'close'),
+        5000
+      );
+    }
+  }
   static propTypes = {
-    desc: PropTypes.string.isRequired,
-    handleMoveTicket: PropTypes.func.isRequired
+    desc: PropTypes.string
   };
   static contextTypes = {
     router: PropTypes.object
@@ -32,12 +27,12 @@ class Ticket extends Component {
       e.stopPropagation();
     }
     this.props.updateTicket(id, desc, status);
-    if (to && status !== 'done') {
+    if (to) {
       clearTimeout(to);
       to = undefined;
       return;
     }
-    if (status === 'done') {
+    if (!to && status === 'done') {
       to = setTimeout(
         e => this.updateTicketHandler(e, id, desc, 'close'),
         5000
@@ -52,33 +47,41 @@ class Ticket extends Component {
   render() {
     const { desc, id } = this.props.ticket;
     return (
-      <div
-        style={styles.ticket}
-        onClick={() => this.redirectDetailPageHandler(id)}
+      <div className="col s12 m7"
+      onClick={() => this.redirectDetailPageHandler(id)}
       >
-        <div>{desc}</div>
-        <div>
-          {this.props.ticket.status === 'todo' && (
-            <button
-              onClick={e => this.updateTicketHandler(e, id, desc, 'done')}
-            >
-              Done
-            </button>
-          )}
-          {this.props.ticket.status === 'done' && (
-            <button
-              onClick={e => this.updateTicketHandler(e, id, desc, 'todo')}
-            >
-              Not Fix
-            </button>
-          )}
-          {this.props.ticket.status !== 'close' && (
-            <button
-              onClick={e => this.updateTicketHandler(e, id, desc, 'close')}
-            >
-              Close
-            </button>
-          )}
+        <div className="card horizontal ticket">
+          <div className="card-stacked">
+            <div className="card-content">
+              <p>{desc}</p>
+            </div>
+            <div className="card-action">
+              {this.props.ticket.status === 'todo' && (
+                <button
+                  className="card-button waves-effect waves-light btn"
+                  onClick={e => this.updateTicketHandler(e, id, desc, 'done')}
+                >
+                  Done
+                </button>
+              )}
+              {this.props.ticket.status === 'done' && (
+                <button
+                  className="card-button waves-effect waves-light btn"
+                  onClick={e => this.updateTicketHandler(e, id, desc, 'todo')}
+                >
+                  Not Fix
+                </button>
+              )}
+              {this.props.ticket.status !== 'close' && (
+                <button
+                  className="card-button waves-effect waves-light btn"
+                  onClick={e => this.updateTicketHandler(e, id, desc, 'close')}
+                >
+                  Close
+                </button>
+              )}
+            </div>
+          </div>
         </div>
       </div>
     );

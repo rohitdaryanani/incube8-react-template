@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import Ticket from '../components/Ticket';
-
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { addTicket, updateTicket } from '../actions/index';
@@ -72,7 +70,6 @@ class TicketDetail extends Component {
     this.setState({
       ticketInputeValue: e.target.value
     });
-    console.log(this.state.ticketInputeValue);
   };
 
   handleTicketStatusValueHandler = e => {

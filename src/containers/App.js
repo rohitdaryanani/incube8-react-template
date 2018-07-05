@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { addTicket, updateTicket } from '../actions/index';
 
+import './App.css'
+
 const styles = {
   container: {
     display: 'flex'
@@ -12,11 +14,14 @@ const styles = {
   box: {
     flex: '0 1 33%',
     textAlign: 'center',
-    borderRight: '1px solid #ccc',
     label: {
+      color: '#333',
       fontWeight: 600
-    }
-  }
+    },
+    backgroundColor: '#e2e4e6',
+    padding: '10px',
+    margin: '0 10px', 
+  },
 };
 
 class App extends Component {
@@ -50,22 +55,44 @@ class App extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.addTicketHandler}>
-          <input
-            type="text"
-            style={{ borderRadius: '3px' }}
-            name="ticket"
+      <form className="col s12" onSubmit={this.addTicketHandler} style={{marginLeft: '29%'}}>
+        <div className="row">
+            <div className="input-field col s6">
+            <input 
+            id="ticket" type="text" className="validate" 
             value={this.state.ticketInputeValue}
             onChange={this.handleTicketInputValueHandler}
           />
-          <input
-            type="submit"
-            value="ADD"
-            style={{ cursor: 'pointer' }}
-            disabled={this.state.loading}
-          />
-          {this.state.loading && <bold>...</bold>}
-        </form>
+          <label htmlFor="ticket">Ticket Name</label>
+            </div>
+            <div className="input-field col s6">
+              {!this.state.loading &&       
+                <button 
+                  className="btn waves-effect waves-light card-button"
+                  type="submit">Add!
+                </button>
+                }
+                {this.state.loading &&       
+                  <div class="preloader-background">
+                    <div class="preloader-wrapper active">
+                      <div class="spinner-layer spinner-blue-only">
+                        <div class="circle-clipper left">
+                          <div class="circle"></div>
+                        </div>
+                        <div class="gap-patch">
+                          <div class="circle"></div>
+                        </div>
+                        <div class="circle-clipper right">
+                          <div class="circle"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>  
+                }
+            </div>
+        </div>
+      </form>
+
         <br />
         <br />
         <div style={styles.container}>

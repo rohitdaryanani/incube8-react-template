@@ -1,0 +1,13 @@
+.card-button {
+    background: #f36511;
+    margin: 10px 10px 0 0;
+  }
+
+  .card-button:hover {
+    background: #c7520c;
+    margin: 10px 10px 0 0;
+  }
+
+  .ticket {
+      cursor: pointer;
+  }
