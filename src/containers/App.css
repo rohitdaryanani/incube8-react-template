@@ -28,9 +28,19 @@
 
   .card-button {
     background: #f36511;
-    margin-top: 10;
+    margin-top: 10px;
   }
   .card-button:hover {
     background: #c7520c;
-    margin-top: 10;
+    margin-top: 10px;
+  }
+
+  .card-button:focus {
+    background: #c7520c;
+    margin-top: 10px;
+  }
+
+  .ticket-details-container{
+    width: 50%;
+    margin: 10% auto;
   }

@@ -3,26 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { addTicket, updateTicket } from '../actions/index';
 
-const styles = {
-  container: {
-    display: 'flex'
-  },
-  box: {
-    flex: '0 1 33%',
-    textAlign: 'center',
-    borderRight: '1px solid #ccc',
-    label: {
-      fontWeight: 600
-    }
-  },
-  ticket: {
-    width: '400px',
-    margin: '0px auto',
-    border: '1px solid rgb(204, 204, 204)',
-    borderRadius: '3px',
-    padding: '0.5em'
-  }
-};
+import './App.css';
 
 class TicketDetail extends Component {
   state = {
@@ -82,44 +63,54 @@ class TicketDetail extends Component {
     if (!this.state.ticket) {
       return <p>404</p>;
     }
+
     return (
-      <div style={styles.ticket}>
-        <h1>Update Ticket</h1>
-        <form onSubmit={this.updateTicketHandler}>
-          <p>
-            Description:
-            <input
-              type="text"
-              style={{ borderRadius: '3px', marginLeft: 20, width: 200 }}
-              name="ticket"
-              value={this.state.ticketInputeValue}
-              onChange={this.handleTicketInputValueHandler}
-            />
-          </p>
-          {this.state.check && (
-            <span style={{ color: '#ff003b', marginLeft: 5 }}>
-              This value is required{' '}
-            </span>
-          )}
-          <p>
-            Status:
-            <select
-              value={this.state.status}
-              onChange={this.handleTicketStatusValueHandler}
-              style={{ borderRadius: '3px', marginLeft: 54 }}
-            >
-              <option value="todo">Todo</option>
-              <option value="done">Done</option>
-              <option value="close">Close</option>
-            </select>
-          </p>
-          <input
-            type="submit"
-            value="Update"
-            style={{ cursor: 'pointer' }}
-            disabled={this.state.loading}
-          />
-        </form>
+      <div class="col s12 m7 ticket-details-container">
+        <div class="card horizontal">
+          <div class="card-stacked">
+            <div class="card-content">
+              <span class="card-title">Update TicketCard</span>
+              <form onSubmit={this.updateTicketHandler}>
+                <div className="input-field col s6">
+                  <input
+                    id="ticket"
+                    id="ticket"
+                    type="text"
+                    className="validate"
+                    value={this.state.ticketInputeValue}
+                    onChange={this.handleTicketInputValueHandler}
+                  />
+                  <label className="active" htmlFor="ticket">Description</label>
+                  {this.state.check && (<span
+                    className="helper-text"
+                    style={{ color: '#ff003b'}}
+                  >
+                    This value is required
+                  </span>)}
+                </div>
+                <label>Status:</label>
+                <select
+                  value={this.state.status}
+                  onChange={this.handleTicketStatusValueHandler}
+                  className="browser-default"
+                >
+                  <option value="" disabled selected>
+                    Choose your option
+                  </option>
+                  <option value="todo">Todo</option>
+                  <option value="done">Done</option>
+                  <option value="close">Close</option>
+                </select>
+                <button
+                  className="btn waves-effect waves-light card-button"
+                  type="submit"
+                >
+                  Update
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

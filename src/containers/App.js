@@ -58,12 +58,12 @@ class App extends Component {
       <form className="col s12" onSubmit={this.addTicketHandler} style={{marginLeft: '29%'}}>
         <div className="row">
             <div className="input-field col s6">
-            <input 
-            id="ticket" type="text" className="validate" 
-            value={this.state.ticketInputeValue}
-            onChange={this.handleTicketInputValueHandler}
-          />
-          <label htmlFor="ticket">Ticket Name</label>
+              <label htmlFor="ticket">Ticket Name</label>
+              <input 
+              id="ticket" type="text" className="validate" 
+              value={this.state.ticketInputeValue}
+              onChange={this.handleTicketInputValueHandler}
+              />
             </div>
             <div className="input-field col s6">
               {!this.state.loading &&       
