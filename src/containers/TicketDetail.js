@@ -69,7 +69,7 @@ class TicketDetail extends Component {
         <div class="card horizontal">
           <div class="card-stacked">
             <div class="card-content">
-              <span class="card-title">Update TicketCard</span>
+              <span class="card-title">Update Ticket Card</span>
               <form onSubmit={this.updateTicketHandler}>
                 <div className="input-field col s6">
                   <input

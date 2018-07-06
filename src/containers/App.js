@@ -5,14 +5,14 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { addTicket, updateTicket } from '../actions/index';
 
-import './App.css'
+import './App.css';
 
 const styles = {
   container: {
     display: 'flex'
   },
   box: {
-    flex: '0 1 33%',
+    // flex: '0 1 33%',
     textAlign: 'center',
     label: {
       color: '#333',
@@ -20,8 +20,8 @@ const styles = {
     },
     backgroundColor: '#e2e4e6',
     padding: '10px',
-    margin: '0 10px', 
-  },
+    margin: '0 10px'
+  }
 };
 
 class App extends Component {
@@ -55,49 +55,54 @@ class App extends Component {
   render() {
     return (
       <div>
-      <form className="col s12" onSubmit={this.addTicketHandler} style={{marginLeft: '29%'}}>
-        <div className="row">
+        <form
+          className="col s12"
+          onSubmit={this.addTicketHandler}
+          style={{ marginLeft: '29%' }}
+        >
+          <div className="row">
             <div className="input-field col s6">
               <label htmlFor="ticket">Ticket Name</label>
-              <input 
-              id="ticket" type="text" className="validate" 
-              value={this.state.ticketInputeValue}
-              onChange={this.handleTicketInputValueHandler}
+              <input
+                id="ticket"
+                type="text"
+                className="validate"
+                value={this.state.ticketInputeValue}
+                onChange={this.handleTicketInputValueHandler}
               />
             </div>
             <div className="input-field col s6">
-              {!this.state.loading &&       
-                <button 
+              {!this.state.loading && (
+                <button
                   className="btn waves-effect waves-light card-button"
-                  type="submit">Add!
+                  type="submit"
+                >
+                  Add!
                 </button>
-                }
-                {this.state.loading &&       
-                  <div class="preloader-background">
-                    <div class="preloader-wrapper active">
-                      <div class="spinner-layer spinner-blue-only">
-                        <div class="circle-clipper left">
-                          <div class="circle"></div>
-                        </div>
-                        <div class="gap-patch">
-                          <div class="circle"></div>
-                        </div>
-                        <div class="circle-clipper right">
-                          <div class="circle"></div>
-                        </div>
+              )}
+              {this.state.loading && (
+                <div class="preloader-background">
+                  <div class="preloader-wrapper active">
+                    <div class="spinner-layer spinner-blue-only">
+                      <div class="circle-clipper left">
+                        <div class="circle" />
+                      </div>
+                      <div class="gap-patch">
+                        <div class="circle" />
+                      </div>
+                      <div class="circle-clipper right">
+                        <div class="circle" />
                       </div>
                     </div>
-                  </div>  
-                }
+                  </div>
+                </div>
+              )}
             </div>
-        </div>
-      </form>
-
-        <br />
-        <br />
-        <div style={styles.container}>
-          <div style={styles.box}>
-            <label style={styles.box.label}>IN-PROGRESS</label>
+          </div>
+        </form>
+        <div className="row">
+          <div className="ticket-container">
+            <label className="ticket-label">IN-PROGRESS</label>
             {this.props.tickets
               .filter(ticket => ticket.status === 'todo')
               .map((ticket, index) => {
@@ -110,8 +115,8 @@ class App extends Component {
                 );
               })}
           </div>
-          <div style={styles.box}>
-            <label style={styles.box.label}>DONE</label>
+          <div className="ticket-container">
+            <label className="ticket-label">DONE</label>
             {this.props.tickets
               .filter(ticket => ticket.status === 'done')
               .map((ticket, index) => {
@@ -124,8 +129,8 @@ class App extends Component {
                 );
               })}
           </div>
-          <div style={styles.box}>
-            <label style={styles.box.label}>CLOSE</label>
+          <div className="ticket-container">
+            <label className="ticket-label">CLOSE</label>
             {this.props.tickets
               .filter(ticket => ticket.status === 'close')
               .map((ticket, index) => {

@@ -47,7 +47,7 @@ class Ticket extends Component {
   render() {
     const { desc, id } = this.props.ticket;
     return (
-      <div className="col s12 m7"
+      <div
       onClick={() => this.redirectDetailPageHandler(id)}
       >
         <div className="card horizontal ticket">

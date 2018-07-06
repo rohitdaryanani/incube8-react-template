@@ -44,3 +44,24 @@
     width: 50%;
     margin: 10% auto;
   }
+
+  .ticket-container{
+    text-align: center;
+    background-color: rgb(226, 228, 230);
+    padding: 10px;
+    margin: 0px 5px;
+    width: 32%;
+    float: left;
+  }
+
+  .ticket-label {
+    color: #333;
+    font-weight: 600;
+  }
+
+  @media only screen and (max-width: 768px) {
+    .ticket-container {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}
