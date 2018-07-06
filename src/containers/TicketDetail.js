@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { addTicket, updateTicket } from '../actions/index';
+import { Link } from 'react-router-dom';
 
 import './App.css';
 
@@ -74,7 +75,6 @@ class TicketDetail extends Component {
                 <div className="input-field col s6">
                   <input
                     id="ticket"
-                    id="ticket"
                     type="text"
                     className="validate"
                     value={this.state.ticketInputeValue}
@@ -107,6 +107,7 @@ class TicketDetail extends Component {
                 >
                   Update
                 </button>
+                <Link to="/" className="btn waves-effect waves-light card-button">Back</Link>
               </form>
             </div>
           </div>

@@ -7,23 +7,6 @@ import { addTicket, updateTicket } from '../actions/index';
 
 import './App.css';
 
-const styles = {
-  container: {
-    display: 'flex'
-  },
-  box: {
-    // flex: '0 1 33%',
-    textAlign: 'center',
-    label: {
-      color: '#333',
-      fontWeight: 600
-    },
-    backgroundColor: '#e2e4e6',
-    padding: '10px',
-    margin: '0 10px'
-  }
-};
-
 class App extends Component {
   state = {
     ticketInputeValue: '',
@@ -83,7 +66,7 @@ class App extends Component {
               {this.state.loading && (
                 <div class="preloader-background">
                   <div class="preloader-wrapper active">
-                    <div class="spinner-layer spinner-blue-only">
+                    <div class="spinner-layer spinner-color">
                       <div class="circle-clipper left">
                         <div class="circle" />
                       </div>
